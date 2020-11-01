@@ -1,0 +1,22 @@
+{
+	"manifest_version": 2,
+	"name": "ASVZ Sniper",
+	"version": "0.0.1",
+	"icons": { "128": "icon128.png" },
+
+	"description": "Snipe the first position in the ASVZ queue",
+
+	"content_scripts": [
+		{
+			"matches": ["https://*.schalter.asvz.ch/tn/lessons/*"],
+			"js": ["content.js"]
+		}
+	],
+	"browser_action": {
+		"default_popup": "popup.html",
+		"defualt_icon": {
+			"128": "icon128.png"
+		}
+	},
+	"permissions": ["*://schalter.asvz.ch/*", "storage", "declarativeContent"]
+}

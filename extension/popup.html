@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>ASVZ Sniper</title>
+	</head>
+	<style>
+		* {
+			--primary: #44a;
+			--neutral: #c1c1c1;
+			--success: #a3f1a3;
+			--fail: red;
+			font-family: Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+		}
+
+		body {
+			display: flex;
+			flex-direction: column;
+			width: 200px;
+			max-height: 300px;
+			font-size: 14px;
+			transition-property: height;
+			transition-duration: 0.5s;
+		}
+
+		h4 {
+			margin: 0;
+			cursor: pointer;
+		}
+
+		button {
+			border-radius: 3px;
+			font-weight: bold;
+		}
+
+		.header {
+			display: flex;
+			flex-direction: row;
+			width: 100%;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.legend {
+			display: flex;
+			flex-direction: row;
+			font-size: 10px;
+			justify-content: center;
+			align-items: center;
+			margin-top: 10px;
+		}
+
+		.legend .symbol {
+			height: 8px;
+			width: 8px;
+			border-radius: 50%;
+		}
+
+		.legend label {
+			margin-left: 2px;
+			margin-right: 6px;
+		}
+
+		.lessons {
+			display: flex;
+			flex-direction: column;
+			margin-top: 4px;
+			overflow-y: auto;
+		}
+
+		.lessons::-webkit-scrollbar {
+			width: 5px;
+		}
+
+		.lessons .lesson {
+			display: flex;
+			flex-direction: row;
+			padding: 7px 0;
+			border-top: 1px solid #eee;
+		}
+		.lessons .lesson .info {
+			width: 100%;
+		}
+
+		.lessons .lesson .extra {
+			font-size: 12px;
+		}
+
+		.lessons .lesson .status {
+			padding: 2px;
+			cursor: pointer;
+		}
+
+		.lessons .lesson .status .symbol {
+			width: 20px;
+			height: 20px;
+			border-radius: 50%;
+			color: var(--primary);
+			font-size: 9px;
+			line-height: 20px;
+			text-align: center;
+			transition-duration: 0.2s;
+			font-family: monospace;
+		}
+
+		.lessons .lesson .status .symbol:hover {
+			border: 3px solid var(--neutral);
+		}
+
+		.symbol.primary {
+			border: 3px solid var(--primary);
+		}
+
+		.symbol.success {
+			border: 3px solid var(--success);
+		}
+
+		.symbol.neutral {
+			border: 3px solid var(--neutral);
+		}
+
+		.symbol.fail {
+			border: 3px solid var(--fail);
+			font-size: 15px !important;
+			color: var(--fail) !important;
+		}
+
+		.symbol.fail:hover {
+			color: var(--neutral) !important;
+		}
+
+		.token-info {
+			border-top: 1px solid #eee;
+			font-size: 8px;
+			padding-top: 5px;
+			margin: 0;
+		}
+
+		.settings {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 0vw;
+			width: 100vw;
+			background: var(--primary);
+			border-bottom: 1px solid var(--neutral);
+			z-index: 4;
+			transition-property: height;
+			transition-duration: 0.5s;
+			overflow: hidden;
+			color: white;
+		}
+
+		.user-info {
+			font-size: 10px;
+		}
+
+		.close {
+			position: absolute;
+			top: 4px;
+			right: 10px;
+			font-size: 20px;
+			font-weight: bold;
+			cursor: pointer;
+		}
+
+		.container {
+			margin-top: 10px;
+			padding-left: 15px;
+			padding-right: 20px;
+		}
+
+		.container input {
+			width: 100px;
+			border-radius: 3px;
+			font-size: 14px;
+			padding: 3px;
+			outline: none;
+		}
+
+		.row {
+			display: flex;
+			flex-direction: row;
+			width: 100%;
+			align-items: center;
+			margin-top: 8px;
+			margin-bottom: 10px;
+			font-size: 14px;
+		}
+
+		.row *:first-child {
+			margin-right: 4px;
+		}
+
+		label[for="inp_endpoint"] {
+			font-size: 14px;
+		}
+
+		.alert {
+			margin-top: 5px;
+			margin-bottom: 5px;
+			padding: 5px;
+			font-size: 12px;
+			background-color: var(--primary);
+			color: white;
+			text-align: center;
+		}
+	</style>
+
+	<body>
+		<div class="header">
+			<button id="btn_add" disabled>add</button>
+			<pre class="user-info">id: 834534934</pre>
+			<!-- <button id="btn_settings">settings</button> -->
+		</div>
+		<div class="legend">
+			<div class="symbol primary"></div>
+			<label>Awaiting</label>
+			<div class="symbol neutral"></div>
+			<label>Cancel</label>
+			<div class="symbol success"></div>
+			<label>Success</label>
+		</div>
+		<div class="lessons"></div>
+		<pre class="token-info"></pre>
+		<div class="settings">
+			<div class="close">&times;</div>
+
+			<div class="container">
+				<h4>Server endpoint</h4>
+				<div class="row">
+					<label for="inp_endpoint">https://</label>
+					<input id="inp_endpoint" type="text" />
+				</div>
+				<h4>Access key</h4>
+				<div class="row">
+					<label for="inp_access_key">sniper_</label>
+					<input id="inp_access_key" type="text" />
+				</div>
+				<div class="row">
+					<b>Status: </b>
+					<div id="server_status">not connected</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<template id="tmp_target">
+		<div class="lesson">
+			<div class="info">
+				<h4>Body Combat</h4>
+				<div class="extra">
+					<span class="date">12.10.2020</span> at
+					<span class="time">3PM</span>
+				</div>
+			</div>
+			<div class="status">
+				<div class="symbol primary">2m</div>
+			</div>
+		</div>
+	</template>
+
+	<script src="utils.js"></script>
+	<script src="popup.js"></script>
+</html>
