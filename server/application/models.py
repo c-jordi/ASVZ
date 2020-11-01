@@ -15,7 +15,7 @@ class Enrollment(db.Model):
     enrollment_time = db.Column(db.Integer)
     hide = db.Column(db.Integer, default=0)
     position = db.Column(db.Integer, default=-1)
-    last_change = db.Column(db.String(40))
+    change_date = db.Column(db.String(40))
 
     def __init__(self, user_id=None, name=None, token=None, lesson_id=None, lesson_name=None, lesson_time=None, job_id=None, enrollment_time=None, change_date=None, positon=None):
         self.user_id = user_id

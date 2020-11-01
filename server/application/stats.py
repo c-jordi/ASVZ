@@ -9,8 +9,10 @@ def check_registration(event):
         job_id=job_id).first()
 
     if record:
-        record.position, record.change_date = get_position(
+        position, change_date = get_position(
             record.lesson_id, record.token)
+        record.position = position
+        record.change_date = change_date
         db.session.commit()
 
 
