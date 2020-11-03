@@ -41,7 +41,7 @@ def add_target(user_id, name, access_token, target, **kargs):
 def add_job(token, lesson_id, enrollment_from):
     job_id = uuid1().hex
     scheduler.add_job(enroll_request, trigger="date", args=[token, lesson_id,
-                                                            enrollment_from], id=job_id, run_date=datetime.fromtimestamp(enrollment_from/1000 -1))
+                                                            enrollment_from], id=job_id, run_date=datetime.fromtimestamp(enrollment_from/1000 - 1))
     return job_id
 
 
@@ -56,7 +56,7 @@ def enroll_request(token, lesson_id, enrollment_from):
         "Pragma": 'no-cache',
         "Referer": f'https://schalter.asvz.ch/tn/lessons/{lesson_id}'
     }
-    delta = enrollment_from - time.time()
+    delta = enrollment_from/1000 - time.time()
     time.sleep(delta)
     endpoint = f"https://schalter.asvz.ch/tn-api/api/Lessons/{lesson_id}/enroll??t={enrollment_from}"
     rq = requests.post(endpoint, data={}, headers=HEADERS)
