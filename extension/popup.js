@@ -1,4 +1,4 @@
-const SERVER = "http://0.0.0.0:5000/";
+const SERVER = "https://jordi.co/asvz/";
 
 class ASVZPanel {
 	constructor() {
@@ -33,6 +33,7 @@ class ASVZPanel {
 		document.querySelector(
 			".token-info"
 		).textContent = `${token.name} | ${timeDelta}`;
+		document.querySelector(".user-info").textContent = `id: ${token.person_id}`;
 		this.loadTargets();
 	}
 
@@ -129,7 +130,6 @@ class ASVZPanel {
 	async addTarget() {
 		const { lessonInfo } = this.target;
 		const token = this.token;
-		console.log("token", token);
 		await postData(SERVER + "add", {
 			target: {
 				lesson_id: lessonInfo.id,
@@ -262,7 +262,7 @@ class ASVZPanel {
 					setTimeout(() => decreaseCount(countdown - 1), 1000);
 				} else {
 					clone.textContent = "?";
-					setTimeout(() => location, 2000);
+					setTimeout(() => window.location.reload(), 2000);
 				}
 			}
 		}
