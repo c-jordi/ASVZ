@@ -2,6 +2,10 @@
 
 Chrome extension to automate asvz signup
 
+## Requirements
+1. Chromium based web browser
+2. Access to a server running the ASVZ bot python server or your own machine to run it. If you are running the server on a Raspberry Pi inside the ETH network and want to use the extension outside the network, you'll need to make sure that the server is publicly accessible. 
+
 ## Installation:
 ### Server Folder:
 
