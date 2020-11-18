@@ -1,6 +1,8 @@
 # ASVZ Sniper
-
 Chrome extension to automate asvz signup
+
+## Advisory
+Please act responsibly and don't abuse the bot. It's more fun if we all get to participate in the ASVZ classes. 
 
 ## Requirements
 1. Chromium based web browser
