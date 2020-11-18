@@ -11,7 +11,7 @@ Please act responsibly and don't abuse the bot. It's more fun if we all get to p
 ## Installation:
 ### Server Folder:
 
-Create a virtualenv and run the wsgi.py script. Add whitelisted ids to the `whitelist.yml` file.
+Create a virtualenv, run `setup.py` & run `wsgi.py`. Add whitelisted ids to the `whitelist.yml` file.
 
 ### Extension:
 Edit popup.js file and change the SERVER variable to match the url of your server.  
