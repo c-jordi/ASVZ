@@ -1,4 +1,4 @@
-const SERVER = "https://jordi.co/asvz/";
+const SERVER = "YOUR_SERVER_ADDRESS";
 
 class ASVZPanel {
 	constructor() {
@@ -269,10 +269,6 @@ class ASVZPanel {
 		return () => {
 			decreaseCount(countDuration);
 		};
-	}
-
-	removeTargetPanel(targetId) {
-		return this.removeTargetPanel(targetId);
 	}
 
 	removeTargetPanel(targetId) {
